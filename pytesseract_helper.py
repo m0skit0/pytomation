@@ -5,6 +5,11 @@ from pytomation import android
 
 
 def process_image(path):
+    """
+    Processes image in OCR and returns its text elements as a list of dictionaries.
+    :param path: Path to the image.
+    :return: List of image elements.
+    """
     raw_data = pytesseract.image_to_boxes(Image.open(path))
     return _raw_data_to_elements(raw_data)
 
@@ -40,6 +45,12 @@ def _fix_element_y_coordinates(element, max_y):
 
 
 def click_coordinates_for_char(elements, char):
+    """
+    Returns click coordinates for the specified character (first appearance).
+    :param elements: Image elements as returned by process_image()
+    :param char: Character to look for.
+    :return: Click coordinates as a tuple (x, y).
+    """
     element = find_character(elements, char)
     assert element is not None
     x1 = element['top-right'][0]
@@ -52,4 +63,10 @@ def click_coordinates_for_char(elements, char):
 
 
 def find_character(elements, char):
+    """
+    Returns first element dictionary with the specified character.
+    :param elements: Image elements as returned by process image()
+    :param char: Character to look for.
+    :return: Element dictionary of the first element with that character.
+    """
     return next((entry for entry in elements if entry['char'] == char), None)
