@@ -27,19 +27,20 @@ throttling_presets = {
 }
 
 
-def launch(config=None):
+def launch(path=CHARLES_APP_PATH, config=None):
     """
     Launches Charles, killing it first if it was already running.
     Also disables local mapping, throttling and rewrites for a clean state startup.
+    :param path: Charles app path.
     :param config: Charles config XML path to load. This is where several options are set up, e.g. mappings.
     (see Charles documentation: https://www.charlesproxy.com/documentation/using-charles/command-line-options/)
     :return: Nothing.
     """
     kill()
     if config is None:
-        process = subprocess.Popen(CHARLES_APP_PATH)
+        process = subprocess.Popen(path)
     else:
-        process = subprocess.Popen([CHARLES_APP_PATH, '--config', config])
+        process = subprocess.Popen([path, '--config', config])
     time.sleep(10)  # Wait for Charles to boot
     disable_local_mapping()
     time.sleep(1)
