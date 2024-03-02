@@ -1,6 +1,10 @@
 # Pytomation
 
-Python modules for Android and Charles proxy automation mainly oriented for testing.
+Python modules for Android and Charles proxy automation, mainly oriented for testing automation.
+
+`android.py` is the Android automation module. It expects `adb` to be in the environment PATH.
+`pytesseract_helper.py` is a helper module for the Pytesseract OCR library. Can be used to do OCR on a screenshot captured by the `android` module and return coordinates of specified text. Useful when testing WebViews or games where no actual Android views are present.
+`charles.py` is the Charles automation module. Currently only works in MacOS and Linux.
 
 Example of automating the process of setting the Charles proxy in Pixel devices using the Android module:
 
