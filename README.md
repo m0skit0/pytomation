@@ -2,13 +2,44 @@
 
 Python modules for Android and Charles proxy automation, mainly oriented for testing automation.
 
+## Android module:
+
+- Runs in any OS with `adb` and Python support.
+- Locking/unlocking Android devices.
+- Installing/uninstalling apps.
+- Stopping/lauching any app.
+- Clearing app data.
+- Accessing data folder filesystem for debug apps.
+- Home, back and overview button tapping.
+- Tapping, long tapping, swiping views by resource id, content description, text or absolute coordinates.
+- Full keyboard simulation.
+- Current screen view hierarchy as Python dictionary with full view details (resource id, coordinates, etc...).
+- Current app and activity name.
+- Switching between apps in overview.
+- Screenshots (saved in host computer, not in device).
+- OCR recognition through Pytesseract library, returning coordinates of recognized character (for tapping/swiping, etc...).
+- Waiting for activity, app or view with specified conditions (text, resource id, name...) to appear. Includes timeout to not block forever.
+- Permission dialogs "wait and accept".
+- Full logcat access (including clearing it).
+- Detecting Android version and API level.
+
 `android.py` is the Android automation module. It expects `adb` to be in the environment PATH.
 
 `pytesseract_helper.py` is a helper module for the Pytesseract OCR library. Can be used to do OCR on a screenshot captured by the `android` module and return coordinates of specified text. Useful when testing WebViews or games where no actual Android views are present.
 
+## Charles module:
+
+- Stopping/launching Charles (only in MacOS and Linux).
+- Loading Charles XML configuration (this loads mappings, rewrites and other Charles configurations).
+- Enabling/disabling local mappings, rewrites and throttling.
+- Accessing current session.
+- Checking entries in current session, including host, path and body of requests as dictionaries.
+
 `charles.py` is the Charles automation module. Currently only works in MacOS and Linux.
 
-Example of automating the process of setting the Charles proxy in Pixel devices using the Android module:
+## Examples
+
+- Example of automating the process of setting the Charles proxy in Pixel devices using the Android module:
 
 ```
 import time
