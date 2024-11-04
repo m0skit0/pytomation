@@ -644,3 +644,20 @@ def api_level():
     :return: API level as integer.
     """
     return int(_check_output('adb shell getprop ro.build.version.sdk'))
+
+def airplane_mode(is_enabled = None):
+    """
+    Turns Airplane mode on/off
+    :param is_enabled: True for Airplane mode on, False for Airplane mode off, None for switching
+    """
+    if is_enabled is None:
+        output = _check_output('adb shell cmd connectivity airplane-mode')
+        if output == 'enabled':
+            is_enabled = False
+        else:
+            is_enabled = True
+    if is_enabled:
+        param = 'enable'
+    else:
+        param = 'disable'
+    _run_command(['adb', 'shell', 'cmd', 'connectivity', 'airplane-mode', param])
