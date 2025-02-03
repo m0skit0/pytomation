@@ -661,3 +661,17 @@ def airplane_mode(is_enabled = None):
     else:
         param = 'disable'
     _run_command(['adb', 'shell', 'cmd', 'connectivity', 'airplane-mode', param])
+
+def launch_deeplink(url, expected_activity = None):
+    """
+    Launch a deep link intent with the specified URL.
+    :param url: Deep link URL
+    :param expected_activity: Activity the deep link is expected to land into.
+    :return:
+    """
+    _run_adb_shell(f'am start -a android.intent.action.VIEW -d "{url}"')
+    if expected_activity is None:
+        return True
+    else:
+        return wait_for_activity(expected_activity)
+
