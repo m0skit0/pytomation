@@ -502,7 +502,7 @@ def wait_for_activity(activity, timeout=5):
         if activity in current_activity_name():
             return True
         else:
-            time.sleep(0.5)
+            time.sleep(1)
     return False
 
 
@@ -515,8 +515,9 @@ def wait_for_res(res_id, timeout=5, debug=False):
     :return: True if the view was found before the timeout, False otherwise.
     """
     for i in range(timeout):
-        if find_view_by_id(res_id, debug=debug) is not None:
+        if find_view_by_id(res_id, debug=debug) is None:
             return True
+        time.sleep(1)
     return False
 
 
